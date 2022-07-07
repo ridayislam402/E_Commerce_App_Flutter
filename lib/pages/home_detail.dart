@@ -19,22 +19,18 @@ class HomeDetailPage extends StatelessWidget {
             alignment: MainAxisAlignment.spaceBetween,
             children: [
               Text("\$${item.price}",style: TextStyle(
-                  color:Colors.black,
+                  //color:Colors.black,
                   fontWeight: FontWeight.bold,
                   fontSize: 20
               )),
-              ElevatedButton(onPressed: () {
-
-              },
+              ElevatedButton(onPressed: () {},
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.black),
                     shape: MaterialStateProperty.all(StadiumBorder()),
                     minimumSize: MaterialStateProperty.all(const Size(100, 40)),
-
-                    
                   ) ,
-                  
-                  child: Text('Add to Cart'))
+                  child: Text('Add to Cart')
+              )
             ],
           ),
         ),
@@ -59,7 +55,7 @@ class HomeDetailPage extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(item.name,style: TextStyle(
-                      color:Colors.black,
+                     // color:Colors.black,
                         fontWeight: FontWeight.bold,
                         fontSize: 20
                       ),

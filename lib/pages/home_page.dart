@@ -23,13 +23,16 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     loadData();
   }
-var list; //can view with only list
+var catalog; //can view with only list
   loadData() async{
     //await Future.delayed(Duration(seconds: 2));
    var catalogJson=await rootBundle.loadString("assets/file/catalog.json");
    var decodeData=jsonDecode(catalogJson);
    var productData=decodeData["products"];
-   list=List.from(productData)
+   catalog=List.from(productData)
+       .map<Item>((item) => Item.fromMap(item))
+       .toList();
+   CatalogModel.items=List.from(productData)
        .map<Item>((item) => Item.fromMap(item))
        .toList();
   // print(decodeData);
@@ -46,10 +49,10 @@ var list; //can view with only list
       floatingActionButton: FloatingActionButton(onPressed: () {
         Navigator.pushNamed(context, MyRoute.cartpage);
       },
-        backgroundColor: Colors.black,
+       // backgroundColor: Colors.black,
       child: Icon(CupertinoIcons.cart),
       ),
-      body:(list!=null && list.isNotEmpty)? 
+      body:(catalog!=null && catalog.isNotEmpty)?
           GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -58,7 +61,7 @@ var list; //can view with only list
               ),
               itemBuilder: (context,index){
               // final item=list[index];
-               return CatalogModel2(item: list[index],);
+               return CatalogModel2(catalog: catalog[index],);
                /* return Card(
                   clipBehavior: Clip.antiAlias,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -69,7 +72,7 @@ var list; //can view with only list
                     )
                 );*/
               },
-              itemCount: list.length,
+              itemCount: catalog.length,
           )
       :Center(child: CircularProgressIndicator(),),
       drawer: MyDrawer(),

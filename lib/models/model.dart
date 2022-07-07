@@ -1,5 +1,23 @@
+//import 'package:collection/collection.dart';
 class CatalogModel{
- static List<Item> item=[
+  /// single ton
+  static final catModel=CatalogModel._internal();
+  CatalogModel._internal();
+  factory CatalogModel()=>catModel;
+
+  /////////
+
+
+  static List<Item> items=[];
+  //get Item by id
+  //Item getById(int id)=>item.firstWhere((element) => element.id==id, orElse: null);
+  Item getById(int id) =>
+      items.firstWhere((element) => element.id == id, orElse: null);
+  //get Item by position
+  Item getByPosition(int pos)=>items[pos];
+
+
+ /*static List<Item> item=[
    Item(id: 0,
        name: 'riday',
        desc: 'very good',
@@ -8,6 +26,7 @@ class CatalogModel{
        image: 'https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
    ),
    ///can add more item list
+  */
   /* Item(id: "01",
        name: 'riday2',
        desc: 'very good',
@@ -21,9 +40,12 @@ class CatalogModel{
        price: 100,
        color: '#33505a',
        image: 'https://images.unsplash.com/photo-1493612276216-ee3925520721?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FydG9vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60'
-   )*/
+   )*//*
 
-  ];
+  ];*/
+
+
+
 }
 class Item{
   final int id;
