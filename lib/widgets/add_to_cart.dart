@@ -16,7 +16,7 @@ class addToCard extends StatefulWidget {
 
 class _addToCardState extends State<addToCard> {
   final _cart = CartModel();
-  // bool isadd=true;
+ 
   bool isadd= false;
 
   @override
