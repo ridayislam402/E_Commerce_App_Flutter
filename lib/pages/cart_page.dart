@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_all_in_one/models/cart.dart';
+import 'package:velocity_x/velocity_x.dart';
+
+import '../core/store.dart';
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
@@ -35,13 +38,13 @@ class _CartTotal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _cart=CartModel();
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return SizedBox(
       height: 200,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          
+
           Text("\$${_cart.totalPrice}",style: TextStyle(
             //color:Colors.black,
               fontWeight: FontWeight.bold,
@@ -65,18 +68,13 @@ class _CartTotal extends StatelessWidget {
 }
 
 
-class _CartList extends StatefulWidget {
-  const _CartList({Key? key}) : super(key: key);
+class _CartList extends StatelessWidget {
 
-  @override
-  State<_CartList> createState() => _CartListState();
-}
 
-class _CartListState extends State<_CartList> {
-  final _cart=CartModel();
 
   @override
   Widget build(BuildContext context) {
+    final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty?Text("Nothing to show")
         :ListView.builder(
       //itemCount: 1,
@@ -88,7 +86,7 @@ class _CartListState extends State<_CartList> {
           icon: Icon(Icons.remove_circle_outline),
           onPressed: (){
             _cart.remove(_cart.items[index]);
-            setState((){});
+           // setState((){});
           },
         ),
         title: Text(_cart.items[index].name),

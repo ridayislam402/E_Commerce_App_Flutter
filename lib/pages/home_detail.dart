@@ -25,7 +25,7 @@ class HomeDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 20
               )),
-          addToCard(catalog: item),
+          AddToCart(catalog: item),
             ],
           ),
         ),

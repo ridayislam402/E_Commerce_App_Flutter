@@ -53,7 +53,7 @@ class CatalogModel2 extends StatelessWidget {
             fontWeight: FontWeight.bold,
            ),),
           ),
-          addToCard(catalog: catalog),
+          AddToCart(catalog: catalog),
 
          ],
         ),
