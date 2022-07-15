@@ -41,6 +41,7 @@ class _CartTotal extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          
           Text("\$${_cart.totalPrice}",style: TextStyle(
             //color:Colors.black,
               fontWeight: FontWeight.bold,
@@ -76,7 +77,8 @@ class _CartListState extends State<_CartList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return _cart.items.isEmpty?Text("Nothing to show")
+        :ListView.builder(
       //itemCount: 1,
         itemCount: _cart.items.length,
         itemBuilder: (context,index)
@@ -84,7 +86,10 @@ class _CartListState extends State<_CartList> {
         leading: Icon(Icons.done),
         trailing: IconButton(
           icon: Icon(Icons.remove_circle_outline),
-          onPressed: (){},
+          onPressed: (){
+            _cart.remove(_cart.items[index]);
+            setState((){});
+          },
         ),
         title: Text(_cart.items[index].name),
       ),

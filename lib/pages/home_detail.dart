@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_all_in_one/models/model.dart';
 
+import '../widgets/add_to_cart.dart';
+
 class HomeDetailPage extends StatelessWidget {
   //const HomeDetailPage({Key? key}) : super(key: key);
   final Item item;
@@ -23,14 +25,7 @@ class HomeDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 20
               )),
-              ElevatedButton(onPressed: () {},
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black),
-                    shape: MaterialStateProperty.all(StadiumBorder()),
-                    minimumSize: MaterialStateProperty.all(const Size(100, 40)),
-                  ) ,
-                  child: Text('Add to Cart')
-              )
+          addToCard(catalog: item),
             ],
           ),
         ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_all_in_one/models/cart.dart';
 import 'package:flutter_all_in_one/models/model.dart';
 import 'package:flutter_all_in_one/pages/home_detail.dart';
+import 'package:flutter_all_in_one/widgets/add_to_cart.dart';
 
 class CatalogModel2 extends StatelessWidget {
  // const CatalogModel2({Key? key}) : super(key: key);
@@ -52,48 +53,11 @@ class CatalogModel2 extends StatelessWidget {
             fontWeight: FontWeight.bold,
            ),),
           ),
-          _addToCard(catalog: catalog),
+          addToCard(catalog: catalog),
 
          ],
         ),
       ),
-    );
-  }
-}
-
-
-class _addToCard extends StatefulWidget {
- // final Item catelog;
-  final Item catalog;
-  const _addToCard({Key? key, required this.catalog}) : super(key: key);
-
-  @override
-  State<_addToCard> createState() => _addToCardState();
-}
-final _cart = CartModel();
-class _addToCardState extends State<_addToCard> {
-
- // bool isadd=true;
-  bool isadd= false;
-  @override
-  Widget build(BuildContext context) {
-   // isadd=_cart.items.contains(widget.catalog) ??  false;
-    return  ElevatedButton(onPressed: (){
-      print(isadd);
-       isadd=true;
-       print(isadd);
-      final _catalog = CatalogModel();
-
-       _cart.catalog = _catalog;
-       _cart.add(widget.catalog);
-
-      //print(widget.catalog);
-       setState(() {});
-
-
-    },
-        child:isadd?Icon(Icons.done): Text('Add to Cart'),
-
     );
   }
 }
