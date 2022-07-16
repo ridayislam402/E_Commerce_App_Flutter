@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_all_in_one/core/store.dart';
+import 'package:flutter_all_in_one/models/cart.dart';
 import 'package:flutter_all_in_one/models/model.dart';
 import 'package:flutter_all_in_one/utils/route.dart';
 import 'package:flutter_all_in_one/widgets/drawer.dart';
 import 'package:flutter_all_in_one/widgets/style_widgets_gridview.dart';
 import 'package:flutter_all_in_one/widgets/themes.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../widgets/style_widgets.dart';
 class Homepage extends StatefulWidget {
@@ -38,6 +41,7 @@ var catalog; //can view with only list
   // print(decodeData);
     setState((){});
   }
+  final _cart = (VxState.store as MyStore).cart;
   @override
   Widget build(BuildContext context) {
    // final dummylist=List.generate(5, (index) => CatalogModel.item[0],); same item print
@@ -46,11 +50,18 @@ var catalog; //can view with only list
       actions: [
         ChangeMyTheme()
       ],),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.pushNamed(context, MyRoute.cartpage);
-      },
-       // backgroundColor: Colors.black,
-      child: Icon(CupertinoIcons.cart),
+      floatingActionButton: VxConsumer(
+        mutations: {AddMutation,RemoveMutation},
+        notifications: {},
+
+        builder:(context,_) => FloatingActionButton(
+
+          onPressed: () {
+          Navigator.pushNamed(context, MyRoute.cartpage);
+        },
+         // backgroundColor: Colors.black,
+        child: Icon(CupertinoIcons.cart),
+        ).badge(size: 20,count: _cart.items.length),
       ),
       body:(catalog!=null && catalog.isNotEmpty)?
           GridView.builder(

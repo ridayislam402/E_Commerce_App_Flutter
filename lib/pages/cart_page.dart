@@ -24,7 +24,7 @@ class CartPage extends StatelessWidget {
             ),
             Divider(),
             _CartTotal(),
-            test(),
+           
           ],
         ),
       ),
@@ -45,12 +45,18 @@ class _CartTotal extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
 
-          Text("\$${_cart.totalPrice}",style: TextStyle(
-            //color:Colors.black,
-              fontWeight: FontWeight.bold,
-              fontSize: 20
-          )
-          ),
+         VxConsumer(
+          mutations: {RemoveMutation}, notifications: {},
+           builder: (context, _) {
+           return  Text("\$${_cart.totalPrice}",style: TextStyle(
+             //color:Colors.black,
+               fontWeight: FontWeight.bold,
+               fontSize: 20
+           )
+           );
+
+         },
+            ),
           ElevatedButton(onPressed: () {
              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Buying Not Supported')));
           },
@@ -74,6 +80,7 @@ class _CartList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    VxState.listen(context, to: [RemoveMutation]);
     final CartModel _cart = (VxState.store as MyStore).cart;
     return _cart.items.isEmpty?Text("Nothing to show")
         :ListView.builder(
@@ -85,7 +92,8 @@ class _CartList extends StatelessWidget {
         trailing: IconButton(
           icon: Icon(Icons.remove_circle_outline),
           onPressed: (){
-            _cart.remove(_cart.items[index]);
+            RemoveMutation(_cart.items[index]);
+           // _cart.remove(_cart.items[index]);
            // setState((){});
           },
         ),
@@ -98,29 +106,4 @@ class _CartList extends StatelessWidget {
 
 
 
-class test extends StatefulWidget {
-  const test({Key? key}) : super(key: key);
 
-  @override
-  State<test> createState() => _testState();
-}
-
-class _testState extends State<test> {
-  bool isadd=false;
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(onPressed: (){
-
-      isadd=true;
-      print(isadd);
-
-      //print(widget.catalog);
-      setState(() {});
-
-
-    },
-      child:isadd?Icon(Icons.done): Text('Add to Cart'),
-
-    );
-  }
-}
