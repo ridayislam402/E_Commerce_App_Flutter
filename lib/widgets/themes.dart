@@ -9,7 +9,7 @@ class MyTheme{
       canvasColor: Colors.white,//for background page color
       appBarTheme: AppBarTheme(
           color: Colors.white,
-          //iconTheme: IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.black),
           foregroundColor: Colors.black
       )
   );

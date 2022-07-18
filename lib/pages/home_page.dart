@@ -11,6 +11,7 @@ import 'package:flutter_all_in_one/widgets/drawer.dart';
 import 'package:flutter_all_in_one/widgets/style_widgets_gridview.dart';
 import 'package:flutter_all_in_one/widgets/themes.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:http/http.dart' as http;
 
 import '../widgets/style_widgets.dart';
 class Homepage extends StatefulWidget {
@@ -21,6 +22,8 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+ // final url = "https://api.jsonbin.io/b/604dbddb683e7e079c4eefd3";
+  final url = "https://api.npoint.io/f49ee8946c1289213765";
   @override
   void initState(){
     super.initState();
@@ -29,7 +32,9 @@ class _HomepageState extends State<Homepage> {
 var catalog; //can view with only list
   loadData() async{
     //await Future.delayed(Duration(seconds: 2));
-   var catalogJson=await rootBundle.loadString("assets/file/catalog.json");
+   //var catalogJson=await rootBundle.loadString("assets/file/catalog.json");
+    var response= await http.get(Uri.parse(url));
+    var catalogJson=response.body;
    var decodeData=jsonDecode(catalogJson);
    var productData=decodeData["products"];
    catalog=List.from(productData)
